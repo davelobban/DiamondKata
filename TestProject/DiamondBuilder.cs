@@ -14,26 +14,18 @@ namespace TestProject
 
         public string[] Build(char value)
         {
-            int charIndex = (int)value;
+            int charIndex = value;
             charIndex -= 65;
 
             if (charIndex == 0)
             {
-                var letter = (char)(65);
+                var letter = (char)65;
                 return new[] { letter.ToString() };
             }
             else
             {
-                var output = new string[1 + (2 * charIndex)];// total length of line =  1 + (2 * charIndex)
-                                                             //line = {padding}{letter}{middlePadding=totalLengthOfLine-2-(2*padding)}{letter}{padding}"
-                                                             /*
-                                                              *   22A22
-                                                              *   1B1B1   
-                                                              *
-                                                              *
-                                                              *
-                                                              */
-                var totalLengthOfLine = (2 * (1 + charIndex)) - 1; //a:1; B: 3; c: 5; D:7
+                var output = new string[1 + (2 * charIndex)];
+                var totalLengthOfLine = (2 * (1 + charIndex)) - 1;
 
                 int outerPadding = charIndex;
                 
@@ -46,12 +38,10 @@ namespace TestProject
                     if (i <= charIndex)
                     {
                         letter = (char)(65 + i);
-                        outputHelper.WriteLine($"L1 letter:{letter}");
                     }
                     else
                     {
                         letter = (char)(65 + Math.Abs((2 * charIndex) - i));
-                        outputHelper.WriteLine($"L2 letter:{letter} charIndex:{charIndex}");
                     }
 
                     if (letter == value)
@@ -60,14 +50,11 @@ namespace TestProject
                         {
                             padding = new string(' ', totalLengthOfLine-2);
                         }
-                        outputHelper.WriteLine($"Padding: \"{padding.Length}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
 
                         output[i] = $"{letter}{padding}{letter}";
-                        outputHelper.WriteLine($"1. output[i]: ..{output[i]}..");
                     }
                     else
                     {
-                        outputHelper.WriteLine($"Padding: \"{padding.Length}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
                         var secondPaddingLength = (totalLengthOfLine - 2) - (2 * outerPadding);
                         secondPaddingLength = secondPaddingLength < 0 ? 0 : secondPaddingLength;
 
@@ -75,7 +62,6 @@ namespace TestProject
                         var secondLetter = i == 0 ? "" : $"{new string(' ', secondPaddingLength)}{secondLetterCharacter }";
 
                         output[i] = $"{new string(' ', outerPadding)}{letter}{secondLetter}{new string(' ', outerPadding)}";
-                        outputHelper.WriteLine($"2. output[i]: ..{output[i]}..");
                     }
 
                     if (beforeMiddle)
