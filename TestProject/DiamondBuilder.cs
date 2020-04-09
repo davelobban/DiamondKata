@@ -1,3 +1,4 @@
+using System;
 using Xunit.Abstractions;
 
 namespace TestProject
@@ -49,22 +50,41 @@ namespace TestProject
                     if (i <= charIndex)
                     {
                         letter = (char)(65 + i);
+                        outputHelper.WriteLine($"L1 letter:{letter}");
                     }
                     else
                     {
-                        letter = (char)(66 + (charIndex - i));
+                        letter = (char)(65 + Math.Abs((2 * charIndex) - i));
+                        outputHelper.WriteLine($"L2 letter:{letter} charIndex:{charIndex}");
                     }
 
                     if (letter == value)
                     {
+                        var secondLetter = i == 0 ? "" : $"{new string(' ', (totalLengthOfLine - 2) - (2 * outerPadding))}{letter}";
+                        if (charIndex > 1)
+                        {
+                            padding = new string(' ', charIndex+1);
+                        }
+                        outputHelper.WriteLine(
+                            $"Padding: \"{padding}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle} secondLetter :{secondLetter }");
+
                         output[i] = $"{letter}{padding}{letter}";
+                        outputHelper.WriteLine($"1. output[i]: ..{output[i]}..");
                     }
                     else
                     {
                         outputHelper.WriteLine(
-                            $"Padding: \"{padding}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine}");
-                        var secondLetter = i==0? "":$"{new string(' ', (totalLengthOfLine - 2) - (2 * outerPadding))}{letter}";
+                            $"Padding: \"{padding}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
+                        string secondLetter="";
+                        //if (beforeMiddle) {
+                            var secondPaddingLength = (totalLengthOfLine - 2) - (2 * outerPadding);
+                            secondPaddingLength = secondPaddingLength < 0 ? 0 : secondPaddingLength;
+                        var secondLetterCharacter = secondPaddingLength > 0 ? letter.ToString() : string.Empty;
+
+                            secondLetter = i == 0 ? "" : $"{new string(' ', secondPaddingLength)}{secondLetterCharacter }";
+                        //}
                         output[i] = $"{new string(' ', outerPadding)}{letter}{secondLetter}{new string(' ', outerPadding)}";
+                        outputHelper.WriteLine($"2. output[i]: ..{output[i]}..");
                     }
 
                     if (beforeMiddle)
