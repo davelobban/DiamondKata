@@ -34,12 +34,27 @@ namespace TestProject
         public void Build_C_ReturnsExpected()
         {
             var result = _diamondBuilder.Build('C');
-            Assert.Equal(result.Length, 5);
+            Assert.Equal(5, result.Length);
             Assert.Equal("  A  ", result[0]);
             Assert.Equal(" B B ", result[1]);
             Assert.Equal("C   C", result[2]);
             Assert.Equal(" B B ", result[3]);
             Assert.Equal("  A  ", result[4]);
+        }
+
+        [Fact]
+        public void Build_D_ReturnsExpected()
+        {
+            var result = _diamondBuilder.Build('D');
+            Assert.Equal(7, result.Length);
+
+            Assert.Equal("   A   ", result[0]);
+            Assert.Equal("  B B  ", result[1]);
+            Assert.Equal(" C   C ", result[2]);
+            Assert.Equal("D     D", result[3]);
+            Assert.Equal(" C   C ", result[4]);
+            Assert.Equal("  B B  ", result[5]);
+            Assert.Equal("   A   ", result[6]);
         }
     }
 

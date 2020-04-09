@@ -46,28 +46,28 @@ namespace TestProject
                     if (i <= charIndex)
                     {
                         letter = (char)(65 + i);
-                        //outputHelper.WriteLine($"L1 letter:{letter}");
+                        outputHelper.WriteLine($"L1 letter:{letter}");
                     }
                     else
                     {
                         letter = (char)(65 + Math.Abs((2 * charIndex) - i));
-                        //outputHelper.WriteLine($"L2 letter:{letter} charIndex:{charIndex}");
+                        outputHelper.WriteLine($"L2 letter:{letter} charIndex:{charIndex}");
                     }
 
                     if (letter == value)
                     {
                         if (charIndex > 1)
                         {
-                            padding = new string(' ', charIndex + 1);
+                            padding = new string(' ', totalLengthOfLine-2);
                         }
-                        //outputHelper.WriteLine($"Padding: \"{padding}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle} secondLetter :{secondLetter }");
+                        outputHelper.WriteLine($"Padding: \"{padding.Length}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
 
                         output[i] = $"{letter}{padding}{letter}";
                         outputHelper.WriteLine($"1. output[i]: ..{output[i]}..");
                     }
                     else
                     {
-                        //outputHelper.WriteLine($"Padding: \"{padding}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
+                        outputHelper.WriteLine($"Padding: \"{padding.Length}\" Letter: {letter}, i: {i}, totalLengthOfLine: {totalLengthOfLine} outerPadding: {outerPadding} beforeMiddle: {beforeMiddle}");
                         var secondPaddingLength = (totalLengthOfLine - 2) - (2 * outerPadding);
                         secondPaddingLength = secondPaddingLength < 0 ? 0 : secondPaddingLength;
 
